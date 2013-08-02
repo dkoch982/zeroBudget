@@ -4,7 +4,7 @@
  *	Project: Zero Budget
  */
 
-package model;
+import model.Transaction;
 
 /** 
  * 	Transfer extends Transaction and is used to keep track of
@@ -15,7 +15,7 @@ package model;
 public class Transfer extends Transaction{
 	private String to;
 	
-	/*
+	/**
 	 *	constructor
 	 *
 	 *	@param string from
@@ -38,8 +38,7 @@ public class Transfer extends Transaction{
 		if(t == null || t == "")
 			return false;
 		
-		this.to = t;
-		
+		this.to = t;		
 		return true;
 	}
 }

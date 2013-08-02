@@ -14,10 +14,17 @@ public abstract class Transaction{
 	private double amount;
 	private String date;
 
-	public Transaction(String f, double a, String d){
-		this.from = f;
-		this.amount = a;
-		this.date = d;
+	/**
+	 * 	constructor
+	 * 
+	 * 	@param String who_from
+	 * 	@param double transaction_amount
+	 * 	@param String date_of
+	 */
+	public Transaction(String who_from, double transaction_amount, String date_of){
+		this.from = who_from;
+		this.amount = transaction_amount;
+		this.date = date_of;
 	}
 
 	// getters
@@ -39,7 +46,6 @@ public abstract class Transaction{
 			return false;
 		
 		this.from = s;
-
 		return true;
 	}
 
@@ -48,7 +54,6 @@ public abstract class Transaction{
 			return false;
 
 		this.amount = a;
-
 		return true;
 	}
 
@@ -57,7 +62,6 @@ public abstract class Transaction{
 			return false;
 		
 		this.from = d;
-
 		return true;
 	}
 }
