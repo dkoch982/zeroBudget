@@ -4,6 +4,8 @@
  *	Project: Zero Budget
  */
 
+// javac -d out -sourcepath src src/OwningAccessor.java
+
 package model;
 
 import java.util.HashMap;
@@ -13,12 +15,14 @@ import java.util.Map;
  * 	BudgetCategory helps organize the budget by breaking it up into
  * 	related budget expenses such as housing, transportation, or food.
  *	Each BudgetCategory has a name to describe the category and 
- *	a list of BudgetItem's that belong to that category.
+ *	a Map of BudgetItem's that belong to that category.
  */
 public class BudgetCategory{
 	private String name;
-	private Map items;
-		
+	private HashMap<String, BudgetItem> items;
+
+
+	
 	/**
 	 * 	constructor for new BudgetCategory
 	 * 
@@ -30,7 +34,7 @@ public class BudgetCategory{
 		else
 			this.name = category_name;
 	
-		this.items = new HashMap();
+		this.items = new HashMap<String, BudgetItem>();
 	}
 	
 	/**
@@ -39,14 +43,14 @@ public class BudgetCategory{
 	 * 	@param String category_name
 	 * 	@param HashMap map
 	 */
-	public BudgetCategory(String category_name, HashMap map){
+	public BudgetCategory(String category_name, HashMap<String, BudgetItem> map){
 		if(category_name == null || category_name == "")
 			this.name = "unknown";
 		else
 			this.name = category_name;
 		
 		if(map == null)
-			this.items = new HashMap();
+			this.items = new HashMap<String, BudgetItem>();
 		else
 			this.items = map;
 	}
@@ -56,7 +60,7 @@ public class BudgetCategory{
 		return this.name;
 	}
 	
-	public Map getItems(){
+	public HashMap getItems(){
 		return this.items;
 	}
 	
@@ -69,7 +73,7 @@ public class BudgetCategory{
 		return true;
 	}
 	
-	public boolean setItems(HashMap map){
+	public boolean setItems(HashMap<String, BudgetItem> map){
 		if(map == null)
 			return false;
 		
@@ -79,24 +83,23 @@ public class BudgetCategory{
 	
 	/**
 	 *  this function takes a new BudgetItem object and adds it to items
-	 *	
-	 *	@param String key
+	 *
 	 *  @param BudgetItem item
 	 *  
 	 *  @return true if successful, false if not
 	 */
-	public boolean addBudgetItem(String key, BudgetItem item){
-		if(key == null || key == "" || item == null)
+	public boolean addBudgetItem(BudgetItem item){
+		if(item == null)
 			return false;
 		
-		this.items.put(key, item);	
+		this.items.put(item.getName(), item);	
 		return true;
 	}
 	
 	/**
 	 * 	this function removes a specified BudgetItem from items
 	 * 
-	 * 	@param String key
+	 * 	@param String name
 	 * 
 	 * 	@return true if successful, false if not
 	 */
@@ -119,7 +122,7 @@ public class BudgetCategory{
 	
 	/**
 	 *  this function returns the object requested from the list array
-	 *  it does not remove the object from the Map
+	 *  it does not remove the object from the map
 	 *  
 	 *  @param String key
 	 *  
@@ -140,8 +143,8 @@ public class BudgetCategory{
 	 */
 	public double getCategoryBudgetedAmount(){
 		double total = 0.00;		
-		for(BudgetItem item : this.items)
-			total += item.getBudgeted();
+		for(Map.Entry<String, BudgetItem> item : this.items.entrySet())
+			total += item.getValue().getBudgeted();
 		
 		return total;
 	}
@@ -154,8 +157,8 @@ public class BudgetCategory{
 	 */
 	public double getCategoryDistributedAmount(){
 		double total = 0.00;
-		for(BudgetItem item : this.items)
-			total += item.getDistributed();
+		for(Map.Entry<String, BudgetItem> item : this.items.entrySet())
+			total += item.getValue().getDistributed();
 		
 		return total;
 	}
@@ -168,8 +171,8 @@ public class BudgetCategory{
 	 */
 	public double getCategorySpentAmount(){
 		double total = 0.00;
-		for(BudgetItem item : this.items)
-			total += item.getSpent();
+		for(Map.Entry<String, BudgetItem> item : this.items.entrySet())
+			total += item.getValue().getSpent();
 		
 		return total;		
 	}
@@ -180,11 +183,10 @@ public class BudgetCategory{
 	 *  
 	 *  @return double
 	 */
-
 	public double getCategoryCashFlow(){
 		double total = 0.00;
-		for(BudgetIem item : this.items)
-			total += item.getCashFlow();
+		for(Map.Entry<String, BudgetItem> item : this.items.entrySet())
+			total += item.getValue().getCashFlow();
 		
 		return total;
 	}

@@ -9,7 +9,7 @@ package model;
 /**
  *	Abstract class includes common functions for the various types of transactions
  */
-public abstract class Transaction{
+public class Transaction{
 	private String from;
 	private double amount;
 	private String date;

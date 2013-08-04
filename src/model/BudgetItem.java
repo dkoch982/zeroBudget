@@ -73,8 +73,7 @@ public class BudgetItem{
 		if(new_name == null || new_name == "")
 			return false;
 		 
-		this.name = new_name;
-		
+		this.name = new_name;		
 		return true;
 	}
 	
@@ -82,8 +81,7 @@ public class BudgetItem{
 		if(new_budgeted < 0.00)
 			return false;
 		 
-		this.budgeted = new_budgeted;
-		
+		this.budgeted = new_budgeted;		
 		return true;
 	}
 	
@@ -91,8 +89,7 @@ public class BudgetItem{
 		if(new_distributed < 0.00)
 			return false;
 		 
-		this.distributed = new_distributed;
-		
+		this.distributed = new_distributed;		
 		return true;
 	}
 	
@@ -100,8 +97,7 @@ public class BudgetItem{
 		if(new_spent < 0.00)
 			return false;
 		 
-		this.spent = new_spent;
-		
+		this.spent = new_spent;		
 		return true;
 	}
 	
@@ -110,8 +106,7 @@ public class BudgetItem{
 		if(amount < 0.00)
 			return false;
 					
-		this.distributed += amount;
-		
+		this.distributed += amount;		
 		return true;
 	}
 	
@@ -120,24 +115,24 @@ public class BudgetItem{
 		if(amount < 0.00)
 			return false;
 		
-		this.spent += amount;
-		
+		this.spent += amount;		
 		return true;
 	}
 	
 	// used to transfer from distributed
-	public boolean transferFrom(double amount){
+	public boolean transfer(double amount){
 		if(amount < 0.00)
 			return false;
 		
-		this.distributed -= amount;
-		
+		this.distributed -= amount;		
 		return true;
 	}
 	
 	/**	
 	 * 	this function returns the cash flow
 	 * 	cash flow = distributed - spent
+	 * 
+	 * 	@return double
 	 */
 	public double getCashFlow(){
 		return (this.distributed - this.spent);

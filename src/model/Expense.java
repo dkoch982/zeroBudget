@@ -45,7 +45,6 @@ public class Expense extends Transaction{
 			return false;
 		
 		this.category = bc;
-
 		return true;
 	}
 	
@@ -54,7 +53,6 @@ public class Expense extends Transaction{
 			return false;
 		
 		this.item = bi;
-
 		return true;
 	}
 }
